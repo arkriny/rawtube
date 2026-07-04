@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	margin: 0;
+	overflow: hidden;
+}
+
+#player {
+	width: 100vw;
+	height: 100vh;
+}
+</style>
+</head>
+<body>
+	<div id="player"></div>
+	<script>
+		const url = new URL(window.location.href);
+		const videoId = url.searchParams.get('v');
+
+		let tag = document.createElement('script');
+		tag.src = 'https://www.youtube.com/iframe_api';
+		document.head.appendChild(tag);
+		function onYouTubeIframeAPIReady() {
+			new YT.Player('player', { videoId });
+		}
+	</script>
+</body>
+</html>
