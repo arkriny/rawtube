@@ -11,6 +11,9 @@ body {
 #player {
 	width: 100vw;
 	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 </style>
 </head>
@@ -19,20 +22,23 @@ body {
 	<script>
 		const url = new URL(window.location.href);
 		const videoId = url.searchParams.get('v');
-
-		let tag = document.createElement('script');
-		tag.src = 'https://www.youtube.com/iframe_api';
-		document.head.appendChild(tag);
-		function onYouTubeIframeAPIReady() {
-			new YT.Player('player', {
-				videoId,
-				events: {
-					onReady: (e) => {
-						document.title = `${e.target.getVideoData().title} - RawTube`;
+		if (videoId === null) {
+			player.innerText = 'No video ID provided. Use ?v= parameter'
+		} else {
+			let tag = document.createElement('script');
+			tag.src = 'https://www.youtube.com/iframe_api';
+			document.head.appendChild(tag);
+			function onYouTubeIframeAPIReady() {
+				new YT.Player('player', {
+					videoId,
+					events: {
+						onReady: (e) => {
+							document.title = `${e.target.getVideoData().title} - RawTube`;
+						},
 					},
-				},
-			});
-		};
+				});
+			};
+		}
 	</script>
 </body>
 </html>
