@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>RawTube</title>
 <style>
 body {
 	margin: 0;
@@ -23,8 +24,15 @@ body {
 		tag.src = 'https://www.youtube.com/iframe_api';
 		document.head.appendChild(tag);
 		function onYouTubeIframeAPIReady() {
-			new YT.Player('player', { videoId });
-		}
+			new YT.Player('player', {
+				videoId,
+				events: {
+					onReady: (e) => {
+						document.title = `${e.target.getVideoData().title} - RawTube`;
+					},
+				},
+			});
+		};
 	</script>
 </body>
 </html>
