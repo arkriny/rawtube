@@ -33,6 +33,10 @@ body {
 		if (videoId === null) {
 			player.innerText = 'No video ID provided. Use ?v= parameter'
 		} else {
+			url.search = '';
+			url.searchParams.set('v', videoId);
+			history.replaceState(null, '', url.toString());
+
 			let tag = document.createElement('script');
 			tag.src = 'https://www.youtube.com/iframe_api';
 			document.head.appendChild(tag);
